@@ -49,7 +49,7 @@ class Kohana_FacebookAuth {
     /**
      * Check users login.
      *
-     * @return bool
+     * @return mixed
      */
 
     public function logged_in() {

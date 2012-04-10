@@ -16,5 +16,5 @@ $fb = FacebookAuth::factory();
 if($fb->logged_in()) {
 	echo $fb->get('email);
 } else {
-	Request::curren()->redirect($fb->login_url());
+	Request::current()->redirect($fb->login_url());
 }
