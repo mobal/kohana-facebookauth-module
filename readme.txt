@@ -14,7 +14,7 @@ Example:
 $fb = FacebookAuth::factory();
 
 if($fb->logged_in()) {
-	echo $fb->get('email);
+	echo $fb->get('email');
 } else {
 	Request::current()->redirect($fb->login_url());
 }
