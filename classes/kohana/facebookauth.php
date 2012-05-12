@@ -53,11 +53,7 @@ class Kohana_FacebookAuth {
      */
 
     public function logged_in() {
-        if($this->fb->getUser()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->fb->getUser() ? true : false;
     }
 
     /**
@@ -90,21 +86,21 @@ class Kohana_FacebookAuth {
             $this->login_url();
 
             throw new FacebookApiException('User is not logged in.');
+        }
+        
+        if(empty($this->data)) {
+            $fql_query = array(
+                'method'    =>  'fql.query',
+                'query' =>  'SELECT ' . $this->config->fields . ' FROM user WHERE uid =' . $uid,
+            );
+
+            $this->data = $this->fb->api($fql_query);
+        }
+
+        if(!empty($this->data[0][$key])) {
+            return $this->data[0][$key];
         } else {
-            if(empty($this->data)) {
-                $fql_query = array(
-                    'method'    =>  'fql.query',
-                    'query' =>  'SELECT ' . $this->config->fields . ' FROM user WHERE uid =' . $uid,
-                );
-
-                $this->data = $this->fb->api($fql_query);
-            }
-
-            if(!empty($this->data[0][$key])) {
-                return $this->data[0][$key];
-            } else {
-                return $default;
-            }
+            return $default;
         }
     }
 
