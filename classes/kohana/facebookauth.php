@@ -10,6 +10,7 @@
  */
 
 class Kohana_FacebookAuth {
+    
     private $login_url, $logout_url;
     private  $config, $data, $fb, $me, $uid;
 
@@ -18,7 +19,8 @@ class Kohana_FacebookAuth {
      *
      * @return FacebookAuth
      */
-    public static function factory() {
+    public static function factory() 
+    {
         return new FacebookAuth();
     }
 
@@ -26,7 +28,8 @@ class Kohana_FacebookAuth {
      * Creates a new FacebookAuth object.
      */
 
-    protected function __construct() {
+    protected function __construct() 
+    {
         include Kohana::find_file('vendor', 'facebook');
 
         // Load configuration "config/facebook"
@@ -52,8 +55,9 @@ class Kohana_FacebookAuth {
      * @return mixed
      */
 
-    public function logged_in() {
-        return $this->fb->getUser() ? true : false;
+    public function logged_in()
+    {
+        return $this->fb->getUser() ? TRUE : FALSE;
     }
 
     /**
@@ -62,13 +66,17 @@ class Kohana_FacebookAuth {
      * @return bool
      */
 
-    public function user_id() {
-        if($this->logged_in()) {
+    public function user_id()
+    {
+        if($this->logged_in())
+        {
             $this->uid = $this->fb->getUser();
 
             return $this->uid;
-        } else {
-            return false;
+        } 
+        else 
+        {
+            return FALSE;
         }
     }
 
@@ -81,14 +89,17 @@ class Kohana_FacebookAuth {
      * @throws FacebookApiException
      */
 
-    public function get($key, $default = NULL) {
-        if(!$uid = $this->user_id()) {
+    public function get($key, $default = NULL)
+    {
+        if( ! $uid = $this->user_id())
+        {
             $this->login_url();
 
             throw new FacebookApiException('User is not logged in.');
         }
         
-        if(empty($this->data)) {
+        if(empty($this->data))
+        {
             $fql_query = array(
                 'method'    =>  'fql.query',
                 'query' =>  'SELECT ' . $this->config->fields . ' FROM user WHERE uid =' . $uid,
@@ -97,9 +108,12 @@ class Kohana_FacebookAuth {
             $this->data = $this->fb->api($fql_query);
         }
 
-        if(!empty($this->data[0][$key])) {
+        if( ! empty($this->data[0][$key]))
+        {
             return $this->data[0][$key];
-        } else {
+        } 
+        else 
+        {
             return $default;
         }
     }
@@ -110,7 +124,8 @@ class Kohana_FacebookAuth {
      * @return string
      */
 
-    public function login_url() {
+    public function login_url()
+    {
         return $this->login_url = urldecode($this->fb->getLoginUrl(array(
             'scope' =>  $this->config->scope,
             'redirect_uri'  =>  $this->config->redirect_uri,
@@ -124,7 +139,8 @@ class Kohana_FacebookAuth {
      * @return string
      */
 
-    public function logout_url()  {
+    public function logout_url() 
+    {
         return $this->logout_url = urldecode($this->fb->getLogoutUrl(array(
             'next'  =>  $this->config->next,
         )));
