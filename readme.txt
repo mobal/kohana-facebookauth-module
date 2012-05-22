@@ -8,13 +8,16 @@ Modified 'facebook.php', now using Kohana's Session manager.
 3. Edit 'config/facebook.php' file.
 
 4. Edit the 'bootstrap.php' file, enable this module.
-.
+
 Example:
 
 $fb = FacebookAuth::factory();
 
-if($fb->logged_in()) {
+if($fb->logged_in())
+{
 	echo $fb->get('email');
-} else {
+}
+else
+{
 	Request::current()->redirect($fb->login_url());
 }
