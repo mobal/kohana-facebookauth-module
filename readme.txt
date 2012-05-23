@@ -20,5 +20,5 @@ if($fb->logged_in())
 }
 else
 {
-	Request::current()->redirect($fb->login_url());
+	HTTP::redirect($fb->login_url());
 }
