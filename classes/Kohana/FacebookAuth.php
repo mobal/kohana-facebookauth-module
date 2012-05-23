@@ -30,7 +30,7 @@ class Kohana_FacebookAuth {
 
     protected function __construct() 
     {
-        include Kohana::find_file('vendor', 'Facebook');
+        include_once Kohana::find_file('vendor', 'Facebook');
 
         // Load configuration "config/facebook"
         $this->config = Kohana::$config->load('facebook');

@@ -1,4 +1,5 @@
-FacebookAuth module for Kohana 3.2. Based on 'facebook-php-sdk-v3.1.1-25-g6c82b3f'.
+FacebookAuth module for Kohana 3.3. Based on 'facebook-php-sdk-v3.1.1-25-g6c82b3f'.
+Updated for 3.3 by davecarlson
 Modified 'facebook.php', now using Kohana's Session manager.
 
 1. Create a folder 'facebookauth' in the modules directory.
