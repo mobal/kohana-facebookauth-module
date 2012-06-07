@@ -30,5 +30,5 @@ return array(
 
     /* Fields from users table.
     user: http://developers.facebook.com/docs/reference/fql/user/ */
-    'fields'    => 'uid, username, pic, name, email'
+    'fields'    => 'uid, username, pic, name, email, first_name, last_name'
 );
