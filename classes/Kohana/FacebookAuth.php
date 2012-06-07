@@ -1,6 +1,6 @@
 <?php
 /**
- * Facebook Authentication module for Kohana 3.2
+ * Facebook Authentication module for Kohana 3.3
  *
  * @package Kohana_FacebookAuth
  * @author Molnár Balázs
@@ -30,7 +30,7 @@ class Kohana_FacebookAuth {
 
     protected function __construct() 
     {
-        include Kohana::find_file('vendor', 'facebook');
+        include_once Kohana::find_file('vendor', 'Facebook');
 
         // Load configuration "config/facebook"
         $this->config = Kohana::$config->load('facebook');
@@ -114,7 +114,20 @@ class Kohana_FacebookAuth {
         } 
         else 
         {
-            return $default;
+        	// DC - Mod to try and fetch and extra field if needed
+        	$fql_query = array(
+                'method'    =>  'fql.query',
+                'query' =>  'SELECT ' . $key . ' FROM user WHERE uid =' . $uid,
+            );
+            
+            $result = $this->fb->api($fql_query);
+            if ( array_key_exists($key, $result[0]) ):
+            	$this->data[0][$key] = $result[0][$key];
+            	return $result[0][$key];
+            else:
+            	return $default;
+            endif;
+            
         }
     }
 

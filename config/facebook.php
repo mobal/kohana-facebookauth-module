@@ -15,10 +15,10 @@ return array(
     error parameters in the URL as described in the authentication documentation.
     If this property is not specified, the user will be redirected to the current URL
     (i.e. the URL of the page where this method was called, typically the current URL in the user's browser). */
-    'redirect_uri'   => url::site(Request::current()->uri(), true),
+    'redirect_uri'   => URL::site(Request::current()->uri(), true),
 
     /* (optional) Next URL to which to redirect the user after logging out (should be an absolute URL). */
-    'next'  =>  url::site(Request::current()->uri(), true),
+    'next'  =>  URL::site(Request::current()->uri(), true),
 
     /* (optional) The permissions to request from the user. If this property is not specified, basic
     permissions will be requested from the user. */
@@ -30,5 +30,5 @@ return array(
 
     /* Fields from users table.
     user: http://developers.facebook.com/docs/reference/fql/user/ */
-    'fields'    => 'uid, username, pic, name, email'
+    'fields'    => 'uid, username, pic, name, email, first_name, last_name'
 );
