@@ -30,5 +30,11 @@ return array(
 
     /* Fields from users table.
     user: http://developers.facebook.com/docs/reference/fql/user/ */
-    'fields'    => 'uid, username, pic, name, email'
+    'fields'    => 'uid, username, pic, name, email',
+    
+    /* Where to store session files.
+       For example:  'native', 'database'
+     */
+    'session_type' => 'native', 
+    
 );
