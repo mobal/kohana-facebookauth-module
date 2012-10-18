@@ -39,7 +39,13 @@ class Facebook extends BaseFacebook
    * @param Array $config the application configuration.
    * @see BaseFacebook::__construct in facebook.php
    */
+  
+  private $_config; 
+   
   public function __construct($config) {
+    $this->_config = $config;
+    if (!$this->_config['session_type']) $this->_config['session_type'] = Session::$default;
+
     parent::__construct($config);
   }
 
@@ -59,7 +65,7 @@ class Facebook extends BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    Session::instance()->set($session_var_name, $value);
+    Session::instance($this->_config['session_type'])->set($session_var_name, $value);
   }
 
   protected function getPersistentData($key, $default = false) {
@@ -69,7 +75,7 @@ class Facebook extends BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    return Session::instance()->get($session_var_name, $default);
+    return Session::instance($this->_config['session_type'])->get($session_var_name, $default);
   }
 
   protected function clearPersistentData($key) {
@@ -79,7 +85,7 @@ class Facebook extends BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    Session::instance()->delete($session_var_name);
+    Session::instance($this->_config['session_type'])->delete($session_var_name);
   }
 
   protected function clearAllPersistentData() {

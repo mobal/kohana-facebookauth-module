@@ -40,6 +40,7 @@ class Kohana_FacebookAuth {
             'appId' =>  $this->config->appId,
             'secret' =>  $this->config->secret,
             'cookie' =>  $this->config->cookie,
+            'session_type' => $this->config->session_type,
         ));
 
         try {
