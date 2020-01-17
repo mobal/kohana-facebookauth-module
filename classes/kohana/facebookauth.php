@@ -146,4 +146,15 @@ class Kohana_FacebookAuth {
             'next'  =>  $this->config->next,
         )));
     }
+    
+    /**
+     * Log out and destroy a session.
+     *
+     * @return string
+     */
+    public function logout()
+    {
+    	$this->fb->destroySession();
+    	return $this->logout_url();
+    }
 }
