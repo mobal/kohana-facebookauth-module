@@ -11,8 +11,8 @@
 
 class Kohana_FacebookAuth {
     
-    private $login_url, $logout_url;
-    private  $config, $data, $fb, $me, $uid;
+    protected $login_url, $logout_url;
+    protected  $config, $data, $fb, $me, $uid;
 
     /**
      * Creates a new FacebookAuth object.
